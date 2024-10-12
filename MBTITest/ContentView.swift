@@ -107,27 +107,33 @@ struct ContentView: View {
                     self.progress = Double(self.answers.count) / Double(self.questions.count)
                     if self.answers.count == self.questions.count {
                         self.showResultView = true
+                        self.result = MBTICalculator().calculate(answers: self.answers, questionBank: self.questions)
+                        Task {
+                            if let result = self.result {
+                                await self.gpt.sendMessage(result.type)
+                            }
+                        }
                     }
                 }
                 .sheet(isPresented: $showResultView) {
                     clearAllData()
                 } content: {
-                    let result = MBTICalculator().calculate(answers: self.answers, questionBank: self.questions)
-                 
-                    NavigationView {
-                        ResultView(result: result)
-                            .environmentObject(gpt)
-                            .toolbar {
-                                ToolbarItem {
-                                    Button {
-                                        self.showResultView = false
-                                    } label: {
-                                        Image(systemName: "xmark.circle.fill")
+                    if let result = self.result {
+                        NavigationView {
+                            ResultView(result: result)
+                                .environmentObject(gpt)
+                                .toolbar {
+                                    ToolbarItem {
+                                        Button {
+                                            self.showResultView = false
+                                        } label: {
+                                            Image(systemName: "xmark.circle.fill")
+                                        }
                                     }
                                 }
-                            }
+                        }
                     }
-                  
+                    
                 }
                 
                 // 页码
@@ -176,6 +182,7 @@ struct ContentView: View {
             self.answers.removeAll()
             self.currentIndex = 0
             self.questions = MBTIQuestions
+            self.result = nil
         }
     }
 }
@@ -192,12 +199,7 @@ struct ResultView: View {
             
             Text(gpt.reponseText)
                 .padding()
-                
-        }
-        .onAppear {
-            Task {
-                await gpt.sendMessage(result.type)
-            }
+            
         }
     }
     
