@@ -19,19 +19,44 @@ import Foundation
 
 struct Question :Identifiable{
     let text: String
-    let options: [String]
+    var options: [Option]
     let dimension: Dimension
     let scoreForOption: [Double] // 每个选项对应的得分
     let id: String
     init(text: String, options: [String], dimension: Dimension, scoreForOption: [Double]) {
         self.text = text
-        self.options = options
+        self.options = options.map({ str in
+            Option(name: str)
+        })
         self.dimension = dimension
         self.scoreForOption = scoreForOption
         self.id = UUID().uuidString
     }
+    
+    mutating func selectOption(_ option: Option) {
+      
+        if let index =  self.options.firstIndex( where: { opt in
+            opt.id == option.id
+       }) {
+            self.options[index].isSelected.toggle()
+       }
+    }
 }
 
+struct Option: Identifiable {
+    var name: String
+    var isSelected: Bool
+    var id: String
+    init(name: String) {
+        self.name = name
+        self.isSelected = false
+        self.id = UUID().uuidString
+    }
+    
+    mutating func click() {
+        self.isSelected.toggle()
+    }
+}
 /// 维度
 enum Dimension: String {
     case extraversionIntroversion = "ExtraversionIntroversion"

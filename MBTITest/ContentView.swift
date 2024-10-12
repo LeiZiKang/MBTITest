@@ -10,8 +10,7 @@ import ZKCompoments
 
 
 struct ContentView: View {
-    private let questions: [Question] = MBTIQuestions
-    
+    @State private var questions: [Question] = MBTIQuestions
     @State private var answers: [Answer] = []
     @State private var progress: Double = 0
     @State private var result: MBTIResult?
@@ -40,20 +39,32 @@ struct ContentView: View {
                                     .font(.title)
                                 
                                 HStack{
-                                    ForEach(question.options, id: \.self) { option in
-                                        Button(option) {
-                                            let answer = Answer(questionID: question.id, selectedOptionIndex: question.options.firstIndex(of: option)!)
+                                    ForEach(question.options) { option in
+                                        Button {
+                                            let answer = Answer(questionID: question.id, selectedOptionIndex: question.options.firstIndex(where: { opt in
+                                                opt.id == option.id
+                                            })!)
                                             if !self.answers.contains(where: { ans in
                                                 ans.questionID == answer.questionID
                                             }){
                                                 self.answers.append(answer)
                                             }
+                                            
                                             scrollNext()
+                                            
+                                            self.questions.enumerated().forEach { index, ques in
+                                                guard ques.id == question.id else { return }
+                                                questions[index].selectOption(option)
+                                            }
+                                        } label: {
+                                            Text(option.name)
+                                                .font(.system(size: 17))
+                                                .foregroundColor(.white)
+                                                .padding()
+                                                .frame(width: 100)
+                                                .background( option.isSelected ? Color.green : Color.gray.opacity(0.4))
+                                                .cornerRadius(16)
                                         }
-                                        .controlSize(.large)
-                                        .buttonStyle(.bordered)
-                                        .buttonBorderShape(.roundedRectangle)
-                                        .padding()
                                     }
                                 }
                             }
