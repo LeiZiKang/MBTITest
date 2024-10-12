@@ -23,12 +23,11 @@ struct ContentView: View {
             
             VStack {
                 
-                //                Text("\(answers.count) / \(questions.count)")
                 ProgressView(value: progress)
                     .progressViewStyle(.linear)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 10)
                     .padding(.horizontal, 20)
+                    .padding(.vertical,5)
                 
                 HStack {
                     ForEach(presentViews()) { question in
@@ -113,7 +112,14 @@ struct ContentView: View {
                 } content: {
                     let result = MBTICalculator().calculate(answers: self.answers, questionBank: self.questions)
                     ResultView(result: result)
+                        .toolbar {
+                            
+                        }
                 }
+                
+                
+                Text("\(answers.count) / \(questions.count)")
+                    .padding()
                 
                 
             }
