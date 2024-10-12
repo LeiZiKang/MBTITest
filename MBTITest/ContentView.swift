@@ -184,8 +184,8 @@ struct ResultView: View {
     let result: MBTIResult
     
     var body: some View {
-        Text("你的 MBTI 类型是：\(result.type)")
-        // ... 其他结果展示
+        Text("\(result.type)")
+        
     }
 }
 

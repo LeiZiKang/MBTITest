@@ -73,7 +73,18 @@ struct Answer {
 struct MBTIResult {
     let type: String
     let scores: [Dimension: Double]
+    
 }
+
+struct MBTIType {
+    var name: String
+    var detail: String
+    init(name: String, detail: String) {
+        self.name = name
+        self.detail = detail
+    }
+}
+
 
 class MBTICalculator {
     
@@ -113,6 +124,9 @@ class MBTICalculator {
         return type.joined()
     }
 }
+
+// MARK: 16中人格类型
+
 
 // MARK: 题目
 
