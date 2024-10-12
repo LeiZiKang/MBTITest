@@ -197,8 +197,15 @@ struct ResultView: View {
             Text("\(result.type)")
                 .font(.title)
             
-            Text(gpt.reponseText)
-                .padding()
+            if gpt.reponseText.isEmpty {
+                ProgressView("loading")
+                    .progressViewStyle(.circular)
+                    .padding()
+            } else {
+                Text(gpt.reponseText)
+                    .padding()
+            }
+                
             
         }
     }

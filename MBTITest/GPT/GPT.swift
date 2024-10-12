@@ -19,7 +19,7 @@ class GPT: ObservableObject {
         apiKey: APIKey.default
     )
     
-    @Published var reponseText: String = "loading"
+    @Published var reponseText: String = ""
     
     ///  发送聊天
     func sendMessage(_ MBTI: String) async  {
