@@ -1,5 +1,5 @@
 {
-  "originHash" : "b0b5053e5fc970d6be5cda08ed39e46fa86bd18d97a8156a93c0a3f3e9cdc5cc",
+  "originHash" : "7baecd44806a7c180f02b05c28c246945decb1595341ded2e9cc18cfd15d09b4",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
         "version" : "5.9.1"
+      }
+    },
+    {
+      "identity" : "swiftuiintrospect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SeifeddineMeddeb/SwiftUIIntrospect",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e03d4ed33d614dd2438e14e53f40f202f5ae4fa0"
       }
     },
     {
