@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 import ZKCompoments
 import GoogleGenerativeAI
 
 struct ContentView: View {
-    @State private var questions: [Question] = MBTIQuestions
+
+    @Query private var questions: [Question]
+    @Environment(\.modelContext) var context
     @State private var answers: [Answer] = []
     @State private var progress: Double = 0
     @State private var result: MBTIResult?
@@ -187,8 +190,12 @@ struct ContentView: View {
         withAnimation(.linear(duration: 0.5)) {
             self.answers.removeAll()
             self.currentIndex = 0
-            self.questions = MBTIQuestions
             self.result = nil
+            self.questions.forEach { question in
+                question.options.forEach { option in
+                    option.isSelected = false
+                }
+            }
         }
     }
 }

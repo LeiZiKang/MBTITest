@@ -27,7 +27,25 @@ struct MBTITestApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(container)
+        .modelContainer(for: Question.self) { result in
+            do {
+                let container = try result.get()
+
+                // 先检查有没数据
+                let descriptor = FetchDescriptor<Question>()
+                let existingQuestions = try container.mainContext.fetchCount(descriptor)
+                guard existingQuestions == 0 else { return }
+
+                let questions = MBTIQuestions
+                // 导入数据
+                for question in questions {
+                    container.mainContext.insert(question)
+                }
+              
+            } catch {
+                print("Failed")
+            }
+        }
     }
 }
 
