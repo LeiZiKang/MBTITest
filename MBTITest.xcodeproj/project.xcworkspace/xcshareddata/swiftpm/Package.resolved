@@ -1,5 +1,5 @@
 {
-  "originHash" : "11b78eba97192d19796cff581fdf69b3e65b441188b1448a1b67e5d7b825a354",
+  "originHash" : "b0b5053e5fc970d6be5cda08ed39e46fa86bd18d97a8156a93c0a3f3e9cdc5cc",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
         "version" : "5.9.1"
+      }
+    },
+    {
+      "identity" : "zkcomponents",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/LeiZiKang/ZKComponents.git",
+      "state" : {
+        "revision" : "2f38995b8ddb4c1bde3ff2796224a238bf48bbef",
+        "version" : "3.1.0"
       }
     }
   ],

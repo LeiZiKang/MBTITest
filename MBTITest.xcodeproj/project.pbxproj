@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DD72D75E2CBA3720008251DF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DD72D75D2CBA3720008251DF /* Alamofire */; };
+		DD72D7712CBA59E7008251DF /* ZKCompoments in Frameworks */ = {isa = PBXBuildFile; productRef = DD72D7702CBA59E7008251DF /* ZKCompoments */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD72D7712CBA59E7008251DF /* ZKCompoments in Frameworks */,
 				DD72D75E2CBA3720008251DF /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +73,7 @@
 			name = MBTITest;
 			packageProductDependencies = (
 				DD72D75D2CBA3720008251DF /* Alamofire */,
+				DD72D7702CBA59E7008251DF /* ZKCompoments */,
 			);
 			productName = MBTITest;
 			productReference = DD72D7302CBA26A9008251DF /* MBTITest.app */;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				DD72D75C2CBA3720008251DF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				DD72D76F2CBA59E7008251DF /* XCRemoteSwiftPackageReference "ZKComponents" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DD72D7312CBA26A9008251DF /* Products */;
@@ -343,6 +347,14 @@
 				minimumVersion = 5.9.1;
 			};
 		};
+		DD72D76F2CBA59E7008251DF /* XCRemoteSwiftPackageReference "ZKComponents" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/LeiZiKang/ZKComponents.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -350,6 +362,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD72D75C2CBA3720008251DF /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		DD72D7702CBA59E7008251DF /* ZKCompoments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD72D76F2CBA59E7008251DF /* XCRemoteSwiftPackageReference "ZKComponents" */;
+			productName = ZKCompoments;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
