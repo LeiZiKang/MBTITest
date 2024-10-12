@@ -7,7 +7,7 @@
 
 import SwiftUI
 import ZKCompoments
-
+import GoogleGenerativeAI
 
 struct ContentView: View {
     @State private var questions: [Question] = MBTIQuestions
@@ -17,7 +17,7 @@ struct ContentView: View {
     @State var offset: CGFloat = .zero
     @State public var currentIndex: Int = 0
     @State private var showResultView: Bool = false
-    
+    @ObservedObject var gpt = GPT()
     var body: some View {
         NavigationView {
             
@@ -113,8 +113,10 @@ struct ContentView: View {
                     clearAllData()
                 } content: {
                     let result = MBTICalculator().calculate(answers: self.answers, questionBank: self.questions)
+                 
                     NavigationView {
                         ResultView(result: result)
+                            .environmentObject(gpt)
                             .toolbar {
                                 ToolbarItem {
                                     Button {
@@ -182,11 +184,23 @@ struct ContentView: View {
 // ResultView 视图用于展示测试结果
 struct ResultView: View {
     let result: MBTIResult
-    
+    @EnvironmentObject var gpt: GPT
     var body: some View {
-        Text("\(result.type)")
-        
+        VStack {
+            Text("\(result.type)")
+                .font(.title)
+            
+            Text(gpt.reponseText)
+                .padding()
+                
+        }
+        .onAppear {
+            Task {
+                await gpt.sendMessage(result.type)
+            }
+        }
     }
+    
 }
 
 #Preview {
