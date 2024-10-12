@@ -23,12 +23,14 @@ struct ContentView: View {
             
             VStack {
                 
+                // 进度条
                 ProgressView(value: progress)
                     .progressViewStyle(.linear)
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal, 20)
                     .padding(.vertical,5)
                 
+                // swipe card
                 HStack {
                     ForEach(presentViews()) { question in
                         ZStack {
@@ -108,17 +110,27 @@ struct ContentView: View {
                     }
                 }
                 .sheet(isPresented: $showResultView) {
-                    
+                    clearAllData()
                 } content: {
                     let result = MBTICalculator().calculate(answers: self.answers, questionBank: self.questions)
-                    ResultView(result: result)
-                        .toolbar {
-                            
-                        }
+                    NavigationView {
+                        ResultView(result: result)
+                            .toolbar {
+                                ToolbarItem {
+                                    Button {
+                                        self.showResultView = false
+                                    } label: {
+                                        Image(systemName: "xmark.circle.fill")
+                                    }
+                                }
+                            }
+                    }
+                  
                 }
                 
-                
-                Text("\(answers.count) / \(questions.count)")
+                // 页码
+                Text("\(currentIndex + 1) / \(questions.count)")
+                    .animation(.bouncy)
                     .padding()
                 
                 
@@ -128,6 +140,7 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
     }
+    
     // 前台展示的3张图片
     func presentViews() -> [Question] {
         let current = questions[currentIndex]
@@ -135,13 +148,15 @@ struct ContentView: View {
         let next = currentIndex == questions.count - 1 ? questions.first! : questions[currentIndex + 1]
         return [pre, current, next]
     }
+    
     // 轮播动画
     func changeBanner(newIndex: Int) {
-        withAnimation(.linear(duration: 0.5)) {
+        withAnimation(.easeInOut) {
             currentIndex = newIndex
             offset = .zero
         }
     }
+    
     // 下一页
     func scrollNext() {
         var newIndex = 0
@@ -151,6 +166,15 @@ struct ContentView: View {
             newIndex = currentIndex + 1
         }
         changeBanner(newIndex: newIndex)
+    }
+    
+    // 还原全部数据
+    func clearAllData() {
+        withAnimation(.linear(duration: 0.5)) {
+            self.answers.removeAll()
+            self.currentIndex = 0
+            self.questions = MBTIQuestions
+        }
     }
 }
 
