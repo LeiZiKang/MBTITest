@@ -34,12 +34,29 @@ struct Question :Identifiable{
     }
     
     mutating func selectOption(_ option: Option) {
-      
+        
         if let index =  self.options.firstIndex( where: { opt in
             opt.id == option.id
-       }) {
+        }) {
             self.options[index].isSelected.toggle()
-       }
+            let after = index + 1
+            let before = index - 1
+            if let afterO = self.options[safe: after]  {
+                self.options[after].isSelected = !self.options[index].isSelected
+            }
+            
+            if let beforeO = self.options[safe: before] {
+                self.options[before].isSelected = !self.options[index].isSelected
+            }
+        }
+    }
+}
+
+/// 防止数组越界
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        guard index >= 0 && index < self.count else { return nil }
+        return self[index]
     }
 }
 
