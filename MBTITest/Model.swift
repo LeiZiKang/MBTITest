@@ -38,7 +38,7 @@ struct Question :Identifiable{
         if let index =  self.options.firstIndex( where: { opt in
             opt.id == option.id
         }) {
-            self.options[index].isSelected.toggle()
+            self.options[index].isSelected = true
             let after = index + 1
             let before = index - 1
             if let afterO = self.options[safe: after]  {
