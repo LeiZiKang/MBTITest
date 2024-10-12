@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 /// MBTI
 /// 理解 MBTI 评分体系
@@ -17,7 +18,8 @@ import Foundation
 /// 判断（J） vs. 感知（P）： 生活方式
 /// 每个维度都有两个极端，通过对一系列问题的回答，我们可以计算出个体在每个维度上的偏好，从而确定其 MBTI 类型。
 
-struct Question :Identifiable{
+@Model
+class Question :Identifiable{
     let text: String
     var options: [Option]
     let dimension: Dimension
@@ -33,7 +35,7 @@ struct Question :Identifiable{
         self.id = UUID().uuidString
     }
     
-    mutating func selectOption(_ option: Option) {
+     func selectOption(_ option: Option) {
         
         if let index =  self.options.firstIndex( where: { opt in
             opt.id == option.id
@@ -52,15 +54,9 @@ struct Question :Identifiable{
     }
 }
 
-/// 防止数组越界
-extension Array {
-    subscript(safe index: Int) -> Element? {
-        guard index >= 0 && index < self.count else { return nil }
-        return self[index]
-    }
-}
 
-struct Option: Identifiable {
+@Model
+class Option: Identifiable {
     var name: String
     var isSelected: Bool
     var id: String
@@ -70,12 +66,13 @@ struct Option: Identifiable {
         self.id = UUID().uuidString
     }
     
-    mutating func click() {
+    func click() {
         self.isSelected.toggle()
     }
 }
 /// 维度
-enum Dimension: String {
+
+enum Dimension: String, Codable {
     case extraversionIntroversion = "ExtraversionIntroversion"
     case sensingIntuition = "SensingIntuition"
     case thinkingFeeling = "ThinkingFeeling"
@@ -142,7 +139,14 @@ class MBTICalculator {
     }
 }
 
-// MARK: 16中人格类型
+/// 防止数组越界
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        guard index >= 0 && index < self.count else { return nil }
+        return self[index]
+    }
+}
+
 
 
 // MARK: 题目
