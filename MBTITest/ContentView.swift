@@ -13,6 +13,7 @@ struct ContentView: View {
     private let questions: [Question] = MBTIQuestions
 
     @State private var answers: [Answer] = []
+    @State private var progress: Double = 0
     @State private var result: MBTIResult?
     @State var offset: CGFloat = .zero
     @State public var currentIndex: Int = 0
@@ -23,7 +24,12 @@ struct ContentView: View {
             
             VStack {
                 
-                Text("\(answers.count) / \(questions.count)")
+//                Text("\(answers.count) / \(questions.count)")
+                ProgressView(value: progress)
+                    .progressViewStyle(.linear)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 10)
+                    .padding(.horizontal, 20)
                 
                 HStack {
                     ForEach(presentViews()) { question in
@@ -86,6 +92,7 @@ struct ContentView: View {
                         })
                 )
                 .onChange(of: self.answers.count) { _, _ in
+                    self.progress = Double(self.answers.count) / Double(self.questions.count)
                     if self.answers.count == self.questions.count {
                         self.showResultView = true
                     }
