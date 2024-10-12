@@ -49,6 +49,12 @@ struct ContentView: View {
                                                 ans.questionID == answer.questionID
                                             }){
                                                 self.answers.append(answer)
+                                            } else {
+                                              if let path = self.answers.firstIndex { ans in
+                                                    ans.questionID == question.id
+                                              } {
+                                                  self.answers[path] = answer
+                                              }
                                             }
                                             
                                             scrollNext()
