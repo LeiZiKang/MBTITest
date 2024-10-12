@@ -11,7 +11,7 @@ import ZKCompoments
 
 struct ContentView: View {
     private let questions: [Question] = MBTIQuestions
-
+    
     @State private var answers: [Answer] = []
     @State private var progress: Double = 0
     @State private var result: MBTIResult?
@@ -24,7 +24,7 @@ struct ContentView: View {
             
             VStack {
                 
-//                Text("\(answers.count) / \(questions.count)")
+                //                Text("\(answers.count) / \(questions.count)")
                 ProgressView(value: progress)
                     .progressViewStyle(.linear)
                     .frame(maxWidth: .infinity)
@@ -34,7 +34,7 @@ struct ContentView: View {
                 HStack {
                     ForEach(presentViews()) { question in
                         ZStack {
-                            Color.green
+                            Color.cyan.opacity(0.6)
                             VStack {
                                 Text(question.text)
                                     .font(.title)
@@ -103,10 +103,10 @@ struct ContentView: View {
                     let result = MBTICalculator().calculate(answers: self.answers, questionBank: self.questions)
                     ResultView(result: result)
                 }
-
-
+                
+                
             }
- 
+            
             .navigationBarTitle("MBTI 测试")
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -141,7 +141,7 @@ struct ContentView: View {
 // ResultView 视图用于展示测试结果
 struct ResultView: View {
     let result: MBTIResult
-
+    
     var body: some View {
         Text("你的 MBTI 类型是：\(result.type)")
         // ... 其他结果展示
