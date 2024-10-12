@@ -11,7 +11,7 @@ import ZKCompoments
 import GoogleGenerativeAI
 
 struct ContentView: View {
-
+    
     @Query private var questions: [Question]
     @Environment(\.modelContext) var context
     @State private var answers: [Answer] = []
@@ -41,42 +41,54 @@ struct ContentView: View {
                             VStack {
                                 Text(question.text)
                                     .font(.title)
+                                    .padding()
                                 
                                 HStack{
-                                    ForEach(question.options) { option in
-                                        Button {
-                                            let answer = Answer(questionID: question.id, selectedOptionIndex: question.options.firstIndex(where: { opt in
-                                                opt.id == option.id
-                                            })!)
+                                    ForEach(question.options, id: \.self) { option in
+                                        Button{
+                                            let answer = Answer(questionID: question.id, selectedOptionIndex: question.options.firstIndex(of: option)!)
                                             if !self.answers.contains(where: { ans in
                                                 ans.questionID == answer.questionID
                                             }){
                                                 self.answers.append(answer)
                                             } else {
-                                              if let path = self.answers.firstIndex { ans in
+                                                if let path = self.answers.firstIndex(where: { ans in
                                                     ans.questionID == question.id
-                                              } {
-                                                  self.answers[path] = answer
-                                              }
+                                                }) {
+                                                    self.answers[path] = answer
+                                                }
                                             }
                                             
                                             scrollNext()
                                             
-                                            self.questions.enumerated().forEach { index, ques in
-                                                guard ques.id == question.id else { return }
-                                                questions[index].selectOption(option)
-                                            }
+                                            
                                         } label: {
-                                            Text(option.name)
+                                            Text(option)
                                                 .font(.system(size: 17))
                                                 .foregroundColor(.white)
                                                 .padding()
                                                 .frame(width: 100)
-                                                .background( option.isSelected ? Color.green : Color.gray.opacity(0.4))
+                                                .background(Color.gray.opacity(0.4))
                                                 .cornerRadius(16)
+                                                .padding(.horizontal)
                                         }
                                     }
                                 }
+                                
+                                
+                                Text("Answer:")
+                                    .font(.title2)
+                                    .padding()
+                                
+                                if let ans = answers[safe: currentIndex] {
+                                    Text(question.options[ans.selectedOptionIndex])
+                                        .foregroundStyle(Color.red)
+                                        .padding()
+                                } else {
+                                   Text("")
+                                        .padding()
+                                }
+                                
                             }
                         }
                         .frame(width: screenW - 40)
@@ -176,13 +188,13 @@ struct ContentView: View {
     
     // 下一页
     func scrollNext() {
-        var newIndex = 0
-        if currentIndex == questions.count - 1 {
-            newIndex = 0
-        } else {
-            newIndex = currentIndex + 1
-        }
-        changeBanner(newIndex: newIndex)
+//        var newIndex = 0
+//        if currentIndex == questions.count - 1 {
+//            newIndex = 0
+//        } else {
+//            newIndex = currentIndex + 1
+//        }
+//        changeBanner(newIndex: newIndex)
     }
     
     // 还原全部数据
@@ -191,11 +203,6 @@ struct ContentView: View {
             self.answers.removeAll()
             self.currentIndex = 0
             self.result = nil
-            self.questions.forEach { question in
-                question.options.forEach { option in
-                    option.isSelected = false
-                }
-            }
         }
     }
 }
@@ -218,7 +225,7 @@ struct ResultView: View {
                 Text(gpt.reponseText)
                     .padding()
             }
-                
+            
             
         }
     }

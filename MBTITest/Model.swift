@@ -21,55 +21,20 @@ import SwiftData
 @Model
 class Question :Identifiable{
     let text: String
-    var options: [Option]
+    var options: [String]
     let dimension: Dimension
     let scoreForOption: [Double] // 每个选项对应的得分
     let id: String
     init(text: String, options: [String], dimension: Dimension, scoreForOption: [Double]) {
         self.text = text
-        self.options = options.map({ str in
-            Option(name: str)
-        })
+        self.options = options
         self.dimension = dimension
         self.scoreForOption = scoreForOption
         self.id = UUID().uuidString
     }
-    
-     func selectOption(_ option: Option) {
-        
-        if let index =  self.options.firstIndex( where: { opt in
-            opt.id == option.id
-        }) {
-            self.options[index].isSelected = true
-            let after = index + 1
-            let before = index - 1
-            if let afterO = self.options[safe: after]  {
-                self.options[after].isSelected = !self.options[index].isSelected
-            }
-            
-            if let beforeO = self.options[safe: before] {
-                self.options[before].isSelected = !self.options[index].isSelected
-            }
-        }
-    }
 }
 
 
-@Model
-class Option: Identifiable {
-    var name: String
-    var isSelected: Bool
-    var id: String
-    init(name: String) {
-        self.name = name
-        self.isSelected = false
-        self.id = UUID().uuidString
-    }
-    
-    func click() {
-        self.isSelected.toggle()
-    }
-}
 /// 维度
 
 enum Dimension: String, Codable {
