@@ -1,5 +1,5 @@
 {
-  "originHash" : "dc744483ef98426fa35dab46f350f2c72b921844b905ddf8789ee82184e72a65",
+  "originHash" : "5fef00aa871909aed56359217e7b3e5c0e8ac447079f12b9e50def9b156e6a19",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -20,12 +20,30 @@
       }
     },
     {
+      "identity" : "objectmapper",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tristanhimmelman/ObjectMapper",
+      "state" : {
+        "revision" : "6021c6035e83a306047348666f6400dc61445d3b",
+        "version" : "4.4.3"
+      }
+    },
+    {
       "identity" : "swiftuiintrospect",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SeifeddineMeddeb/SwiftUIIntrospect",
       "state" : {
         "branch" : "main",
         "revision" : "e03d4ed33d614dd2438e14e53f40f202f5ae4fa0"
+      }
+    },
+    {
+      "identity" : "swiftyjson",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",
+      "state" : {
+        "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
+        "version" : "5.0.2"
       }
     },
     {

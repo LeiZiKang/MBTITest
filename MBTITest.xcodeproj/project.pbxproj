@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD22A0C42CBD0F340027C182 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = DD22A0C32CBD0F340027C182 /* SwiftyJSON */; };
 		DD72D75E2CBA3720008251DF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DD72D75D2CBA3720008251DF /* Alamofire */; };
 		DD72D7712CBA59E7008251DF /* ZKCompoments in Frameworks */ = {isa = PBXBuildFile; productRef = DD72D7702CBA59E7008251DF /* ZKCompoments */; };
 		DD72D7852CBA683C008251DF /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = DD72D7842CBA683C008251DF /* SwiftUIIntrospect */; };
 		DD72D7892CBA683C008251DF /* SwiftUIIntrospect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = DD72D7882CBA683C008251DF /* SwiftUIIntrospect-Static */; };
 		DD72D78C2CBABA26008251DF /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = DD72D78B2CBABA26008251DF /* GoogleGenerativeAI */; };
+		DDE21ED52CBB127C006FB9E8 /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = DDE21ED42CBB127C006FB9E8 /* ObjectMapper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDE21ED52CBB127C006FB9E8 /* ObjectMapper in Frameworks */,
+				DD22A0C42CBD0F340027C182 /* SwiftyJSON in Frameworks */,
 				DD72D78C2CBABA26008251DF /* GoogleGenerativeAI in Frameworks */,
 				DD72D7852CBA683C008251DF /* SwiftUIIntrospect in Frameworks */,
 				DD72D7892CBA683C008251DF /* SwiftUIIntrospect-Static in Frameworks */,
@@ -83,6 +87,8 @@
 				DD72D7842CBA683C008251DF /* SwiftUIIntrospect */,
 				DD72D7882CBA683C008251DF /* SwiftUIIntrospect-Static */,
 				DD72D78B2CBABA26008251DF /* GoogleGenerativeAI */,
+				DDE21ED42CBB127C006FB9E8 /* ObjectMapper */,
+				DD22A0C32CBD0F340027C182 /* SwiftyJSON */,
 			);
 			productName = MBTITest;
 			productReference = DD72D7302CBA26A9008251DF /* MBTITest.app */;
@@ -117,6 +123,8 @@
 				DD72D76F2CBA59E7008251DF /* XCRemoteSwiftPackageReference "ZKComponents" */,
 				DD72D7832CBA683C008251DF /* XCRemoteSwiftPackageReference "SwiftUIIntrospect" */,
 				DD72D78A2CBABA26008251DF /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
+				DDE21ED32CBB127C006FB9E8 /* XCRemoteSwiftPackageReference "ObjectMapper" */,
+				DD22A0C22CBD0F340027C182 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DD72D7312CBA26A9008251DF /* Products */;
@@ -350,6 +358,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DD22A0C22CBD0F340027C182 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 		DD72D75C2CBA3720008251DF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -382,9 +398,22 @@
 				minimumVersion = 0.5.6;
 			};
 		};
+		DDE21ED32CBB127C006FB9E8 /* XCRemoteSwiftPackageReference "ObjectMapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tristanhimmelman/ObjectMapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DD22A0C32CBD0F340027C182 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD22A0C22CBD0F340027C182 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
 		DD72D75D2CBA3720008251DF /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DD72D75C2CBA3720008251DF /* XCRemoteSwiftPackageReference "Alamofire" */;
@@ -409,6 +438,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD72D78A2CBABA26008251DF /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
 			productName = GoogleGenerativeAI;
+		};
+		DDE21ED42CBB127C006FB9E8 /* ObjectMapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDE21ED32CBB127C006FB9E8 /* XCRemoteSwiftPackageReference "ObjectMapper" */;
+			productName = ObjectMapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

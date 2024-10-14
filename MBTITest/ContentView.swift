@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import ZKCompoments
 import GoogleGenerativeAI
+import SwiftyJSON
 
 struct ContentView: View {
     
@@ -85,7 +86,7 @@ struct ContentView: View {
                                         .foregroundStyle(Color.red)
                                         .padding()
                                 } else {
-                                   Text("")
+                                    Text("")
                                         .padding()
                                 }
                                 
@@ -164,6 +165,23 @@ struct ContentView: View {
                 
                 
             }
+            .onAppear(perform: {
+                Task {
+                    if let questionText = await gpt.getNewQuestion() {
+                        let json = JSON(parseJSON: questionText)
+                        let question = Question(json: json)
+                        if !self.questions.contains(where: { que in
+                            que.text == question.text
+                        }) {
+                            await MainActor.run {
+                                self.context.insert(question)
+                               try? self.context.save()
+                            }
+                        }
+                    }
+                }
+                
+            })
             
             .navigationBarTitle("MBTI 测试")
             .navigationBarTitleDisplayMode(.inline)
@@ -188,13 +206,13 @@ struct ContentView: View {
     
     // 下一页
     func scrollNext() {
-//        var newIndex = 0
-//        if currentIndex == questions.count - 1 {
-//            newIndex = 0
-//        } else {
-//            newIndex = currentIndex + 1
-//        }
-//        changeBanner(newIndex: newIndex)
+        //        var newIndex = 0
+        //        if currentIndex == questions.count - 1 {
+        //            newIndex = 0
+        //        } else {
+        //            newIndex = currentIndex + 1
+        //        }
+        //        changeBanner(newIndex: newIndex)
     }
     
     // 还原全部数据

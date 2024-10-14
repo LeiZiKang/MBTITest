@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftData
 import GoogleGenerativeAI
 
 class GPT: ObservableObject {
@@ -33,6 +34,24 @@ class GPT: ObservableObject {
             }
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    /// 获取新的MBTI题目
+    func getNewQuestion() async -> String? {
+        do {
+            let prompt = """
+随机生成一项MBTI测试题，格式如下：
+ text: 你更倾向于按计划做事，还是随机应变？,options: [按计划做事, 随机应变],dimension: judgingPerceiving,scoreForOption: [1, -1] 
+回答不要有任何多余的文字，且为json字符串
+"""
+            let response = try await generativeModel.generateContent(prompt)
+           
+            return response.text
+            
+        } catch {
+            print(error.localizedDescription)
+            return nil
         }
     }
 }

@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftData
+import SwiftyJSON
+
 
 /// MBTI
 /// 理解 MBTI 评分体系
@@ -19,9 +21,9 @@ import SwiftData
 /// 每个维度都有两个极端，通过对一系列问题的回答，我们可以计算出个体在每个维度上的偏好，从而确定其 MBTI 类型。
 
 @Model
-class Question :Identifiable{
+final class Question: Identifiable{
     let text: String
-    var options: [String]
+    let options: [String]
     let dimension: Dimension
     let scoreForOption: [Double] // 每个选项对应的得分
     let id: String
@@ -32,16 +34,33 @@ class Question :Identifiable{
         self.scoreForOption = scoreForOption
         self.id = UUID().uuidString
     }
+    
+    init(json: JSON) {
+        self.text = json["text"].stringValue
+        self.options = json["options"].arrayValue.map{$0.stringValue}
+        let dimension = json["dimension"].stringValue.lowercased()
+        if dimension.contains("extrave") {
+            self.dimension = .extraversionIntroversion
+        } else if dimension.contains("intuit") {
+            self.dimension = .sensingIntuition
+        } else if dimension.contains("think") {
+            self.dimension = .thinkingFeeling
+        } else {
+            self.dimension = .judgingPerceiving
+        }
+        self.scoreForOption = json["scoreForOption"].arrayValue.map{$0.doubleValue}
+        self.id = UUID().uuidString
+    }
 }
 
 
 /// 维度
 
 enum Dimension: String, Codable {
-    case extraversionIntroversion = "ExtraversionIntroversion"
-    case sensingIntuition = "SensingIntuition"
-    case thinkingFeeling = "ThinkingFeeling"
-    case judgingPerceiving = "JudgingPerceiving"
+    case extraversionIntroversion
+    case sensingIntuition
+    case thinkingFeeling
+    case judgingPerceiving
 }
 
 struct Answer {
