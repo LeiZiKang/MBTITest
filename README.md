@@ -92,3 +92,5 @@ struct MBTIResult {
         }
     }
 ```
+## 效果
+
