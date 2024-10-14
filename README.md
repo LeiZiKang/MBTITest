@@ -95,6 +95,6 @@ struct MBTIResult {
 ## 效果
 
 <video width="320" height="240" controls> 
-  <source src="https://github.com/LeiZiKang/MBTITest/blob/dev/Simulator%20Screen%20Recording%20-%20iPhone%2016%20Pro%20-%202024-10-14%20at%2017.30.01.mp4" type="video/mp4"> 
+  <source src="[https://github.com/LeiZiKang/MBTITest/blob/dev/Simulator%20Screen%20Recording%20-%20iPhone%2016%20Pro%20-%202024-10-14%20at%2017.30.01.mp4](https://github.com/LeiZiKang/MBTITest/raw/refs/heads/dev/Simulator%20Screen%20Recording%20-%20iPhone%2016%20Pro%20-%202024-10-14%20at%2017.30.01.mp4)" type="video/mp4"> 
 </video>
 
