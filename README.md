@@ -4,6 +4,29 @@ MBTI测试
 
 接入Google GenerativeAI实现MBTI测试题的生成，与测试结果解析。本地实现MBTI人格测算的算法
 
+
+
+```mermaid
+graph LR
+App(app启动) -->
+Request[请求AI给出MBTI题目] -->
+AI{AI生成题目}
+AI --> |成功| insertDB[添加题目到DB] --> DB
+AI --> |失败| donothing[使用本地题库] --> DB
+DB((DB)) --> 
+test[做题] --> 
+result[测试结果] -->
+post[上报结果] -->
+AI2{AI分析结果} -->
+End(MBTI人格)
+
+
+```
+
+
+
+
+
 ## Detail
 
 从AI获取题目：
@@ -92,9 +115,9 @@ struct MBTIResult {
         }
     }
 ```
+
+
 ## 效果
 
-<video width="320" height="240" controls> 
-  <source src="[https://github.com/LeiZiKang/MBTITest/blob/dev/Simulator%20Screen%20Recording%20-%20iPhone%2016%20Pro%20-%202024-10-14%20at%2017.30.01.mp4](https://github.com/LeiZiKang/MBTITest/raw/refs/heads/dev/Simulator%20Screen%20Recording%20-%20iPhone%2016%20Pro%20-%202024-10-14%20at%2017.30.01.mp4)" type="video/mp4"> 
-</video>
+<video src="./Simulator%20Screen%20Recording%20-%20iPhone%2016%20Pro%20-%202024-10-14%20at%2017.30.01.mp4"></video>
 
