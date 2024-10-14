@@ -79,15 +79,6 @@ struct MBTIResult {
     
 }
 
-struct MBTIType {
-    var name: String
-    var detail: String
-    init(name: String, detail: String) {
-        self.name = name
-        self.detail = detail
-    }
-}
-
 
 class MBTICalculator {
     
@@ -138,7 +129,7 @@ extension Array {
 
 
 
-// MARK: 题目
+// MARK: 本地题目 34个
 
 let MBTIQuestions = [
     Question(text: "你更喜欢独处还是社交？", options: ["独处", "社交"], dimension: .extraversionIntroversion, scoreForOption: [-1, 1]),

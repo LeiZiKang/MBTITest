@@ -22,7 +22,7 @@ class GPT: ObservableObject {
     
     @Published var reponseText: String = ""
     
-    ///  发送聊天
+    ///  人格分析
     func sendMessage(_ MBTI: String) async  {
         do {
             let prompt = "使用中文解释MBTI性格中的" + MBTI + "字数150字"
