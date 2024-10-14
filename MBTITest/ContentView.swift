@@ -80,9 +80,9 @@ struct ContentView: View {
                                 Text("Answer:")
                                     .font(.title2)
                                     .padding()
-                                
-                                if let ans = answers[safe: currentIndex] {
-                                    Text(question.options[ans.selectedOptionIndex])
+                                                                
+                                if let ans = answers[safe: currentIndex] , let ques = question.options[safe: ans.selectedOptionIndex]{
+                                    Text(ques)
                                         .foregroundStyle(Color.red)
                                         .padding()
                                 } else {
@@ -172,7 +172,7 @@ struct ContentView: View {
                         let question = Question(json: json)
                         if !self.questions.contains(where: { que in
                             que.text == question.text
-                        }) {
+                        }) && question.isValid() {
                             await MainActor.run {
                                 self.context.insert(question)
                                try? self.context.save()
@@ -206,13 +206,13 @@ struct ContentView: View {
     
     // 下一页
     func scrollNext() {
-        //        var newIndex = 0
-        //        if currentIndex == questions.count - 1 {
-        //            newIndex = 0
-        //        } else {
-        //            newIndex = currentIndex + 1
-        //        }
-        //        changeBanner(newIndex: newIndex)
+                var newIndex = 0
+                if currentIndex == questions.count - 1 {
+                    newIndex = 0
+                } else {
+                    newIndex = currentIndex + 1
+                }
+                changeBanner(newIndex: newIndex)
     }
     
     // 还原全部数据

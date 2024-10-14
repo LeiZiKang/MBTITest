@@ -53,6 +53,11 @@ final class Question: Identifiable{
     }
 }
 
+extension Question {
+    func isValid() -> Bool {
+        return !text.isEmpty && !options.isEmpty && !scoreForOption.isEmpty
+    }
+}
 
 /// 维度
 
