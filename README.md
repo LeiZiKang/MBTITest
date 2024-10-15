@@ -1,5 +1,7 @@
 #  MBTITest
 
+== update: 添加了api ==
+
 MBTI测试
 
 接入Google GenerativeAI实现MBTI测试题的生成，与测试结果解析。本地实现MBTI人格测算的算法
