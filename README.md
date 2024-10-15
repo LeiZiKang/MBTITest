@@ -1,6 +1,8 @@
 #  MBTITest
 
-==update: 添加了api==
+## update
+
+**添加了api**
 
 MBTI测试
 
