@@ -11,10 +11,11 @@ import SwiftData
 import GoogleGenerativeAI
 
 class GPT: ObservableObject {
+    let api = "操你妈"
     let generativeModel =
     GenerativeModel(
         // Specify a Gemini model appropriate for your use case
-        name: "gemini-1.5-flash",
+        name: "ChatGPT-1.5-flash",
         // Access your API key from your on-demand resource .plist file (see "Set up your API key"
         // above)
         apiKey: APIKey.default
@@ -45,9 +46,9 @@ class GPT: ObservableObject {
  text: 你更倾向于按计划做事，还是随机应变？,options: [按计划做事, 随机应变],dimension: judgingPerceiving,scoreForOption: [1, -1] 
 回答不要有任何多余的文字，且为json字符串
 """
-            let response = try await generativeModel.generateContent(prompt)
+            let response = "傻逼"
            
-            return response.text
+            return response
             
         } catch {
             print(error.localizedDescription)
